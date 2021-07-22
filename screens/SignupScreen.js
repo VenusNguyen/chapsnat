@@ -1,4 +1,4 @@
-import { Text, View, TextInput, Button, StyleSheet } from "react-native";
+import { Text, View, TextInput, Button, StyleSheet, TouchableOpacity } from "react-native";
 import firebase from "@firebase/app";
 import Colors from "../constants/Colors";
 import React, { useState, useEffect } from "react";
@@ -27,19 +27,38 @@ export default function SignupScreen() {
   
     return (
       <View style={styles.container}>
-        <Text style={styles.title}>Email:</Text>
-        <TextInput style={styles.nameInput} onChangeText={setEmail} />
-        <Text style={styles.title}>Password (6+ characters):</Text>
-        <TextInput style={styles.nameInput} onChangeText={setPassword} secureTextEntry={true}/>
-        <Text style={styles.title}>Name:</Text>
-        <TextInput style={styles.nameInput} onChangeText={setName} />
+
+        <View style={styles.inputContainer}>
+          <TextInput
+            style={styles.inputs}
+            placeholder="Email"
+            onChangeText={setEmail}
+          />
+        </View>
+
+        <View style={styles.inputContainer}>
+          <TextInput
+            style={styles.inputs}
+            placeholder="Password (6+ characters)"
+            secureTextEntry={true}
+            onChangeText={setPassword}
+          />
+        </View>
+
+        <View style={styles.inputContainer}>
+          <TextInput
+            style={styles.inputs}
+            placeholder="Name"
+            onChangeText={setName}
+          />
+        </View>
   
-        <Button
+        <TouchableOpacity
+          style={[styles.buttonContainer, styles.signupButton]}
           onPress={onPressCreate}
-          title="Sign up"
-          color={Colors.snapblue}
-          accessibilityLabel="Sign up"
-        />
+        >
+        <Text style={styles.signupText}>Sign up</Text>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -48,6 +67,8 @@ export default function SignupScreen() {
   const styles = StyleSheet.create({
     container: {
         flex: 1,
+        justifyContent: "center",
+      alignItems: "center",
         backgroundColor: Colors.snapyellow,
     },
     title: {
@@ -63,8 +84,39 @@ export default function SignupScreen() {
       borderWidth: 1,
       fontSize: offset,
     },
-    buttonText: {
-      marginLeft: offset,
-      fontSize: 42,
+    buttonContainer: {
+      height: 45,
+      flexDirection: "row",
+      justifyContent: "center",
+      alignItems: "center",
+      marginBottom: 20,
+      width: 300,
+      borderRadius: 30,
+      backgroundColor: "transparent",
+    },
+    signupButton: {
+      backgroundColor: Colors.snapblue,
+    },
+    signupText: {
+      color: "white",
+      fontWeight: "bold",
+    },
+    inputContainer: {
+      borderBottomColor: "#F5FCFF",
+      backgroundColor: "#FFFFFF",
+      borderRadius: 30,
+      borderBottomWidth: 1,
+      borderBottomWidth: 1,
+      width: 300,
+      height: 45,
+      marginBottom: 20,
+      flexDirection: "row",
+      alignItems: "center",
+    },
+    inputs: {
+      height: 45,
+      marginLeft: 16,
+      borderBottomColor: "#FFFFFF",
+      flex: 1,
     },
   });
